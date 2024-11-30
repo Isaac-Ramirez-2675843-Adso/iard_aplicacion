@@ -71,69 +71,77 @@ class _CreatePatientScreenState extends ConsumerState<CreatePatientScreen> {
       appBar: AppBar(title: const Text('Crear Paciente')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _tipoDocumentoController,
-                decoration: const InputDecoration(labelText: 'Tipo de Documento'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Por favor ingresa el tipo de documento';
-                  }
-                  return null;
-                },
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          children: [
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: _tipoDocumentoController,
+                    decoration:
+                        const InputDecoration(labelText: 'Tipo de Documento'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Por favor ingresa el tipo de documento';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                    controller: _documentoController,
+                    decoration:
+                        const InputDecoration(labelText: 'Número de Documento'),
+                    keyboardType: TextInputType.number,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Por favor ingresa el número de documento';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                    controller: _nombreController,
+                    decoration:
+                        const InputDecoration(labelText: 'Primer Nombre'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Por favor ingresa el primer nombre';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                    controller: _segundoNombreController,
+                    decoration:
+                        const InputDecoration(labelText: 'Segundo Nombre'),
+                  ),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                    controller: _primerApellidoController,
+                    decoration:
+                        const InputDecoration(labelText: 'Primer Apellido'),
+                  ),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                    controller: _segundoApellidoController,
+                    decoration:
+                        const InputDecoration(labelText: 'Segundo Apellido'),
+                  ),
+                  _isLoading
+                      ? const CircularProgressIndicator()
+                      : ElevatedButton(
+                          onPressed: _createPaciente,
+                          child: const Text('Crear Paciente'),
+                        ),
+                ],
               ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: _documentoController,
-                decoration:
-                    const InputDecoration(labelText: 'Número de Documento'),
-                keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Por favor ingresa el número de documento';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: _nombreController,
-                decoration: const InputDecoration(labelText: 'Primer Nombre'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Por favor ingresa el primer nombre';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: _segundoNombreController,
-                decoration: const InputDecoration(labelText: 'Segundo Nombre'),
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: _primerApellidoController,
-                decoration:
-                    const InputDecoration(labelText: 'Primer Apellido'),
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: _segundoApellidoController,
-                decoration:
-                    const InputDecoration(labelText: 'Segundo Apellido'),
-              ),
-              _isLoading
-                  ? const CircularProgressIndicator()
-                  : ElevatedButton(
-                      onPressed: _createPaciente,
-                      child: const Text('Crear Paciente'),
-                    ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

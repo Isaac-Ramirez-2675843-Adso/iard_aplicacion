@@ -47,6 +47,25 @@ class PacienteService {
       throw Exception('Error en la solicitud: $e');
     }
   }
+
+  Future<void> eliminarPaciente(Paciente paciente) async {
+    try {
+      final response = await _apiClient.dio.delete(
+        'paciente/${paciente.tipoDocumento}/${paciente.numeroDocumento}',
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception('Error al eliminar el paciente');
+      }
+    } catch (e) {
+      throw Exception('Error en la solicitud: $e');
+    }
+  }
 }
 
 // Proveedor para el servicio de pacientes

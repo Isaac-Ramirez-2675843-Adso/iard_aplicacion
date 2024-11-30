@@ -4,11 +4,13 @@ import '../models/paciente.dart';
 class PacienteCard extends StatelessWidget {
   final Paciente paciente;
   final VoidCallback onEdit;
+  final VoidCallback onDelete;
 
   const PacienteCard({
     super.key,
     required this.paciente,
     required this.onEdit,
+    required this.onDelete,
   });
 
   @override
@@ -20,9 +22,19 @@ class PacienteCard extends StatelessWidget {
         title:
             Text('${paciente.primerNombre} ${paciente.primerApellido ?? ''}'),
         subtitle: Text('Documento: ${paciente.numeroDocumento}'),
-        trailing: IconButton(
-          icon: const Icon(Icons.edit),
-          onPressed: onEdit,
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: onEdit,
+            ),
+            IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: onDelete,
+              color: Colors.red,
+            ),
+          ],
         ),
       ),
     );

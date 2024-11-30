@@ -9,7 +9,7 @@ class ApiClient {
   }
 
   ApiClient._internal() {
-    final baseUrl = 'http://tiris.venko.co:8570/clinica/api/';
+    const baseUrl = 'http://3.222.215.86:8570/clinica/api/';
     _dio = Dio(BaseOptions(baseUrl: baseUrl));
   }
 

@@ -31,7 +31,35 @@ class HomeScreen extends ConsumerWidget {
                     context.push('/edit',
                         extra:
                             paciente); // Navegar con el paciente seleccionado
-                  });
+                  },
+                  onDelete: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Eliminar Paciente'),
+                        content: const Text(
+                            '¿Está seguro de eliminar el paciente?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => context.pop(),
+                            child: const Text('Cancelar'),
+                          ),
+                          TextButton(
+                            onPressed: () async {
+                              await ref
+                                  .read(pacienteServiceProvider)
+                                  .eliminarPaciente(paciente);
+
+                              ref.invalidate(pacientesProvider);
+                              context.pop();
+                            },
+                            child: const Text('Eliminar'),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  );
             },
           );
         },
